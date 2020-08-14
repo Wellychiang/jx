@@ -1,9 +1,5 @@
 import requests
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-import re
-from requests.cookies import RequestsCookieJar
-import json
+import site_url
 
 s = requests.session()
 
@@ -14,15 +10,18 @@ uat = "https://web.6j71.com/"
 def login(user='wade01', pwd='a111222', env='uat'):
 
     if env == 'sit':
-        url = "%sAccount/LogOn?ReturnUrl=" % sit
-        url2 = "%sLoginValidate" % sit
-        url3 = "%sHome/Index" % sit
-        datasUrl = sit
+        # url = "%sAccount/LogOn?ReturnUrl=" % sit
+        # url2 = "%sLoginValidate" % sit
+        # url3 = "%sHome/Index" % sit
+        # datasUrl = sit
+        url = site_url('sit')
+
     elif env == 'uat':
-        url = "%sAccount/LogOn?ReturnUrl=" % uat
-        url2 = "%sLoginValidate" % uat
-        url3 = "%sHome/Index" % uat
-        datasUrl = uat
+        # url = "%sAccount/LogOn?ReturnUrl=" % uat
+        # url2 = "%sLoginValidate" % uat
+        # url3 = "%sHome/Index" % uat
+        # datasUrl = uat
+        url = site_url('uat')
 
     headers = {
         "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
@@ -37,7 +36,7 @@ def login(user='wade01', pwd='a111222', env='uat'):
         "isRegist": "false"
     }
 
-    r = s.post(url, headers=headers, data=data)
+    r = s.post(url.login, headers=headers, data=data)
 
     print(r.json())
 
@@ -45,19 +44,20 @@ def login(user='wade01', pwd='a111222', env='uat'):
     headers2 = {"Content-Type": "application/x-www-form-urlencoded"}
 
     data2 = {
-        "url": "%sLogin" % datasUrl,
+        "url": url.login_validate + "Login",
         "key": r.json()['key'],
         "path": ""
     }
 
-    # getindex區
-    r = s.post(url2, headers=headers2, data=data2, allow_redirects=False)
+    r = s.post(url.login_validate, headers=headers2, data=data2, allow_redirects=False)
     print(r)
     cookies = r.headers['Set-Cookie']
     headers3 = {
         "Cookie": "%s" % cookies
     }
-    r2 = s.get(url3, headers=headers3)
+
+    # getIndex區
+    r2 = s.get(url.login_index, headers=headers3)
     print(r2)
 
 

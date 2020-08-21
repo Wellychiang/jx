@@ -1,4 +1,4 @@
-from element import Element
+
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 # from selenium.webdriver.support import expected_conditions as EC
@@ -6,10 +6,6 @@ import time
 
 
 class Base:
-
-    acc = Element.login_page['account']
-    pwd = Element.login_page['password']
-    sign_in = Element.login_page['sign_in_button']
 
     def __init__(self, driver=None, url=None, page_title=None):
         self.driver = driver
@@ -35,15 +31,10 @@ class Base:
     def _close(self):
         self.driver.close()
 
-    def _login(self, username, pwd):
-        self.open()
-        self.find_element(self.acc).send_keys(username)
-        self.find_element(self.pwd).send_keys(pwd)
-        self.find_element(self.sign_in).click()
-
     def _switch_window(self):
         # from selenium import webdriver
         # drive = webdriver.Chrome()
+        # drive.close()
         # drive.find_element()
         # drive.window_handles
         # drive.current_window_handle
@@ -54,6 +45,3 @@ class Base:
 
     def _sleep(self, times: int):
         time.sleep(times)
-
-    def _loading(self):
-        self.find_element("//div[contains(@id, 'maskOfPro')]")

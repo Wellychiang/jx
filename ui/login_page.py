@@ -1,13 +1,12 @@
 from base import Base
-from element import Element
 from time import sleep
 
 
-class Login(Base):
+class LoginPage(Base):
 
-    acc = Element.login_page['account']
-    pwd = Element.login_page['password']
-    sign_in = Element.login_page['sign_in_button']
+    acc = "//*[@placeholder='帐号']"
+    pwd = "//*[@placeholder='密码']"
+    sign_in_button = "//form[@id='formLogin']//input[@value='登  录']"
 
     def open_browser(self):
         self.open()
@@ -19,4 +18,13 @@ class Login(Base):
         self.find_element(self.pwd).send_keys(pwd)
 
     def click_login(self):
-        self.find_element(self.sign_in).click()
+        self.find_element(self.sign_in_button).click()
+
+    def close(self):
+        self.driver.close()
+
+    def login(self, username, pwd):
+        self.open_browser()
+        self.input_username(username)
+        self.input_pwd(pwd)
+        self.click_login()

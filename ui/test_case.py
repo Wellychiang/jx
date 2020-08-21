@@ -1,5 +1,6 @@
-from login_page import Login
-from deposit_page import Deposit
+from login_page import LoginPage
+from deposit_page import DepositPage
+from home_page import HomePage
 from selenium import webdriver
 
 
@@ -26,27 +27,29 @@ driver.implicitly_wait(10)
 
 def login():
 
-    login = Login(driver, url + sign, PageTitle)
+    login = LoginPage(driver, url + sign, PageTitle)
 
     login.open_browser()
     login.input_username(username)
     login.input_pwd(pwd)
     login.click_login()
+    login.close()
 
 
+# 記得homepage頁有更改
 def test_deposit(money=20):
-    login()
-    deposit = Deposit(driver, url + sign, PageTitle)
+    login = LoginPage(driver, url + sign, PageTitle)
+    deposit = DepositPage(driver, url + sign, PageTitle)
+    home = HomePage(driver, url + sign, PageTitle)
 
-    # deposit.login(username, pwd)
-    deposit.mouse_on_money()
-    deposit.catch_money()
-    deposit.click_to_recharge_page()
-    deposit.switch_window()
-    deposit.loading()
+    login.login(username, pwd)
+    home.mouse_on_money()
+    home.catch_money()
+    home.click_to_recharge_page()
+    home.switch_window()
     deposit.recharge(money)
     print(2)
     deposit.direct_pay_success()
 
 
-# test_deposit()
+

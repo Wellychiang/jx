@@ -25,7 +25,7 @@ driver.implicitly_wait(10)
 # driver.close()
 
 
-def login():
+def test_login():
 
     login = LoginPage(driver, url + sign, PageTitle)
 

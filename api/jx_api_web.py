@@ -153,10 +153,15 @@ class Api:
         print(r)
         return r.json()
 
-    # def real_name_get(self):
-    #     url = 'http://pay.6j71.com/Pay.aspx'
-    #     data = {'Amount': ,
-    #             'Remark': }
+    def real_name_get(self):
+        url = 'http://pay.6j71.com/Pay.aspx'
+        a = self.des_encrypt('cpolyhag', 10)
+        b = self.des_encrypt('cpolyhag', 69778&4058)
+        data = {'Amount': a,
+                'Remark': b}
+
+        r = self.get(url, params=data)
+        print(r)
 
     # Done but need to var Bankid,  BankType
     def withdraw(self, amount: int):
@@ -223,8 +228,7 @@ class Api:
 
 
 api = Api('uat')
-a = api.des_encrypt('cpolyhag',  '69778&4058')
-print(a)
+
 # #
 # api.login('wade01')
 # # a = api.recharge(10)

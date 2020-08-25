@@ -14,12 +14,12 @@ class HomePage(base.Base):
         try:
             self.find_element(self._mouse_on_money).click()
         except:
-            self._sleep(2)
+            self.sleep(2)
             self.find_element(self._mouse_on_money).click()
 
     def catch_money(self):
         if self.find_element(self._balance).text.strip('¥') == '':
-            self._sleep(2)
+            self.sleep(2)
             print(self.find_element(self._balance).text)
         else:
             print(self.find_element(self._balance).text)

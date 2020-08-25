@@ -1,6 +1,6 @@
 
 from selenium.webdriver.support.ui import WebDriverWait
-import time
+from time import sleep
 
 
 class Base:
@@ -34,3 +34,5 @@ class Base:
         windows = self.driver.window_handles
         self.driver.switch_to_window(windows[1])
 
+    def sleep(self, times):
+        sleep(times)

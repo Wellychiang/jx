@@ -30,16 +30,7 @@ class Base:
         self.driver.close()
 
     def _switch_window(self):
-        # from selenium import webdriver
-        # drive = webdriver.Chrome()
-        # drive.close()
-        # drive.find_element()
-        # drive.window_handles
-        # drive.current_window_handle
-        # drive.switch_to_window()
+
         windows = self.driver.window_handles
-        print(windows)
         self.driver.switch_to_window(windows[1])
 
-    def _sleep(self, times: int):
-        time.sleep(times)

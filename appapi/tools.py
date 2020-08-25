@@ -21,8 +21,5 @@ class SomeCase(Base):
 
 
 if __name__ == '__main__':
-    case = SomeCase()
-    # case.card_only_for_WapBank_Alipay_WeiXin(bank_type='WeiXin')
-    # case.h5_only_for_alipay_bank_and_the_second_blank_is_integer('alipay')
-    case.scan_should_input_the_first_blank_like_wechat()
+
 

@@ -1,7 +1,7 @@
-from base import Base
+from ..common import base
 
 
-class DepositPage(Base):
+class DepositPage(base.Base):
 
     _input_amount = "//*[@id='amount']"
     _quick_recharge = "//*[@id='btnJump']"

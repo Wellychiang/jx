@@ -27,7 +27,7 @@ class Api:
             url2 = site.login('login_validate')
             url3 = site.login('login_index')
         else:
-            raise ValueError('Can not input without sit or uat, now you input is: ' + self.env)
+            raise ValueError('Can not input without sit or uat, now your input : ' + self.env)
 
         headers = {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
                     "Cookie": "PlayTypeIntro=1; UserPlayType=0; DePK10UserPlayType=1; "

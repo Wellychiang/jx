@@ -1,8 +1,9 @@
-from base import Base
+
+from ..common import base
 from time import sleep
 
 
-class LoginPage(Base):
+class LoginPage(base.Base):
 
     acc = "//*[@placeholder='帐号']"
     pwd = "//*[@placeholder='密码']"

@@ -1,7 +1,7 @@
-from base import Base
+from ..common import base
 
 
-class HomePage(Base):
+class HomePage(base.Base):
 
     _mouse_on_money = "//*[@class='btn_dropdown']"
     _balance = "//*[@id='divHomeBalance']//div[1]/div[2]/span[2]"

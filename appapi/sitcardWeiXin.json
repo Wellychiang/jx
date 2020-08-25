@@ -1,0 +1,2 @@
+{"success":true,"message":null,"data":[{"BankTypeID":618,"BankTypeName":"招商银行（微信）","MoneyRange":[100,200,300,500,1000,2000,3000,5000],"ServiceType":{"ServiceTypeDescription":"微信(轉卡)","ServiceTypeName":"WeiXin","ServiceTypeID":10},"ShowMin":"100.00","ShowMax":"31000.00"}]}
+{"success":true,"message":null,"data":[{"BankTypeID":618,"BankTypeName":"招商银行（微信）","MoneyRange":[100,200,300,500,1000,2000,3000,5000],"ServiceType":{"ServiceTypeDescription":"微信(轉卡)","ServiceTypeName":"WeiXin","ServiceTypeID":10},"ShowMin":"100.00","ShowMax":"31000.00"}]}

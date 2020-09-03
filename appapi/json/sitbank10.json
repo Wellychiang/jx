@@ -1,0 +1,3 @@
+{'success': True, 'message': None, 'data': [{'BankTypeID': 580, 'BankTypeName': '一键银联支付-WF054F', 'MoneyRange': [], 'ServiceType': {'ServiceTypeDescription': '银联支付 (H5)', 'ServiceTypeName': 'UnionPayH5', 'ServiceTypeID': 19}}]}
+{'success': True, 'message': None, 'data': [{'BankTypeID': 580, 'BankTypeName': '一键银联支付-WF054F', 'MoneyRange': [], 'ServiceType': {'ServiceTypeDescription': '银联支付 (H5)', 'ServiceTypeName': 'UnionPayH5', 'ServiceTypeID': 19}}]}
+{'success': True, 'message': None, 'data': [{'BankTypeID': 580, 'BankTypeName': '一键银联支付-WF054F', 'MoneyRange': [], 'ServiceType': {'ServiceTypeDescription': '银联支付 (H5)', 'ServiceTypeName': 'UnionPayH5', 'ServiceTypeID': 19}}]}

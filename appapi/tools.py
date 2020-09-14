@@ -6,7 +6,7 @@ import os
 class GetRange(Base):
 
     def _login(self):
-        self.login()
+        self.login('wade01')
 
     def card_only_for_WapBank_Alipay_WeiXin(self, bank_type='WapBank', save=True):
         self.get_money_range('card', bank_type, save)
@@ -24,10 +24,10 @@ class GetRange(Base):
 
 
 if __name__ == '__main__':
-    case = GetRange('sit', 'wade13', '87604')
+    case = GetRange('sit')
     case._login()
     os.chdir('json')
     # case.card_only_for_WapBank_Alipay_WeiXin('Alipay')
-    # case.scan_should_input_the_first_blank_and_wechat_only()
-    case.h5_only_for_alipay_bank_and_the_second_blank_is_integer('bank')
+    case.scan_should_input_the_first_blank_and_wechat_only()
+    # case.h5_only_for_alipay_bank_and_the_second_blank_is_integer('bank')
 

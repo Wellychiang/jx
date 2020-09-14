@@ -1,9 +1,9 @@
 class Site:
-    sit = "http://192.168.3.16:7788"
+    sit = "http://192.168.3.16:8082"
     uat = "https://web.6j71.com"
 
     # Login scope
-    login = '/Account/LogOnV1'
+    login = '/Account/LogOnV1/'
     login_page = {'sit': sit + login,
                   'uat': uat + login,}
 

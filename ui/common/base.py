@@ -1,5 +1,5 @@
 
-from selenium.webdriver.support.ui import WebDriverWait
+
 from time import sleep
 
 
@@ -14,7 +14,6 @@ class Base:
         try:
             WebDriverWait(self.driver, 10).until(lambda driver: driver.find_element_by_xpath(args)).is_displayed()
             return self.driver.find_element_by_xpath(args)
-
         except:
             return 'Can not find the' + str(args) + "'s element"
 

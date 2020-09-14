@@ -45,7 +45,7 @@ class Api:
         # validate區
         headers2 = {"Content-Type": "application/x-www-form-urlencoded"}
 
-        data2 = {"url": url2 + "Login",
+        data2 = {"config": url2 + "Login",
                  "key": r.json()['key'],
                  "path": ""}
 

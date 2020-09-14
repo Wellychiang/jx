@@ -13,7 +13,7 @@ pwd = 'a111222'
 
 
 @pytest.fixture()
-def drive(scope='function'):
+def drive():
     driver = webdriver.Chrome()
     driver.implicitly_wait(10)
     yield driver

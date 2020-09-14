@@ -98,7 +98,7 @@ class Base:
         headers = {
             'Content-Type': 'application/x-www-form-urlencoded',
             'X-Hec-Authentication': login_key,
-            'UserID': str(user.id()),
+            'UserID': user.id(),
             'UserName': user.username(),
             'Connection': 'Keep-Alive',
             'Accept-Encoding': 'gzip',
@@ -117,7 +117,7 @@ class Base:
         get = self.s.get(r.json()['Url'])
         print(f'Recharge get: {get}')
 
-    def transfer(self, io='in', game='LC', amount=10):
+    def transfer(self, io='in', game='LC', amount=10, key='123'):
         if self.env == 'sit' or self.env == 'uat':
             site = Site(self.env)
             if io == 'in':
@@ -129,7 +129,7 @@ class Base:
 
         user = UserInfo('wade13')
 
-        headers = {'X-Hec-Authentication': '76add206d3474e17b556e39bd5a1eb42',
+        headers = {'X-Hec-Authentication': key,
                    'UserID': user.id(),
                    'UserName': user.username()}
 
@@ -137,10 +137,14 @@ class Base:
 
         try:
             r = self.s.post(url, headers=headers, params=param, verify=False)
+            if r.json()['success']:
+                pass
+            else:
+                raise ValueError('Post failed by transfer')
         except Exception as e:
             raise ValueError(f'Transfer {io} Error: {e}\nGame: {game}')
 
-    def get_balance(self, username, time) -> 'third game and my balance':
+    def get_balance(self, username, time, key) -> 'third game and my balance':
         if self.env == 'sit' or self.env == 'uat':
             site = Site(self.env)
             url = site.get_account_balance()
@@ -150,10 +154,13 @@ class Base:
             raise EnvironmentError("You can't input without sit or uat. Your input: " + self.env)
 
         headers = {
-            'X-Hec-Authentication': 'cd41175a2583440fa2a0ae1fba235869',
+            'X-Hec-Authentication': key,
             'UserID': user.id(),
             'UserName': user.username(),
             'User-Agent': 'okhttp/3.12.0',
+            'OS': 'iOS',
+            'DeviceName': 'iPhone X',
+            'SysVersion': '12.1.4',
         }
         param = {'v': time}
         try:
@@ -162,6 +169,8 @@ class Base:
             raise ValueError(f'Get balance error: {e}')
 
         third_game_balance = {}
+
+        # print(f'Try: {r.json()["data"]}')
         my_balance = r.json()['data']['AvailableScores']
 
         for k, v in r.json()['data'].items():
@@ -175,4 +184,5 @@ class Base:
 
 if __name__ == '__main__':
     case = Base('sit')
-    case.login()
+    # json = case.login('wade13')
+    # case.transfer(io='out', key=json['data']['key'])

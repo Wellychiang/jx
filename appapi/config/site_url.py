@@ -47,7 +47,7 @@ class Site:
     # Balance
     account_balance = '/account/balance'
     _get_account_balance = {'sit': sit + account_balance,
-                           'uat': uat + account_balance}
+                            'uat': uat + account_balance}
     # Transfer in
     LC = '/LC/TransferIn'
     IM = '/IM/TransferIn'

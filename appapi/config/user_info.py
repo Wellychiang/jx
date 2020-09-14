@@ -1,12 +1,12 @@
 class UserInfo:
 
-    user_item = {'wade01': {'userid': 73613,
+    user_item = {'wade01': {'userid': '73613',
                             'username': 'wade01'},
-                 'wade13': {'userid': 87604,
+                 'wade13': {'userid': '87604',
                             'username': 'wade13'},
-                 'wade12': {'userid': 87603,
+                 'wade12': {'userid': '87603',
                             'username': 'wade12'},
-                 'jackson': {'userid': 69778,
+                 'jackson': {'userid': '69778',
                              'username': 'jackson'}}
 
     def __init__(self, user):

@@ -9,10 +9,10 @@ init = Base('sit')
  # WapBank
 
 
-def test_recharge_success(username='jackson'):
+def test_recharge(username='jackson', bank_type='AlipayH5'):
 
     response = init.login(username)
-    init.recharge(username, 'AlipayH5', 100, response['data']['key'])
+    init.recharge(username, bank_type, 100, response['data']['key'])
 
     # 這裡用headless會渲染不出金額導致用例失敗
     # options = Options()
@@ -29,9 +29,8 @@ def test_recharge_success(username='jackson'):
     driver.find_element_by_xpath("//*[span='Merchant']").click()
     driver.find_element_by_xpath("//a[@href='/MerchantManage/MerchantOrders']/span").click()
 
-    a = driver.find_element_by_xpath("//*[@class='ui-widget-content slick-row even' and @style='top:0px']")
-    check.is_in(username, a.text,)
-    check.is_in('100', a.text)
+    information = driver.find_element_by_xpath("//*[@class='ui-widget-content slick-row even' and @style='top:0px']")
+    print(information.text)
+    check.is_in(username, information.text)
+    check.is_in('100', information.text)
     driver.close()
-
-

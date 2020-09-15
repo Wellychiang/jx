@@ -37,7 +37,7 @@ def test_transfer_in_success_equal_one(username='wade13'):
     # 轉帳各一塊到可轉入的第三方
     [base.transfer('in', game, 1, key) for game in games]
 
-    # 給轉帳到帳20秒時間
+    # 給轉帳後到帳20秒時間
     time.sleep(20)
 
     # 拿轉入第三方後的第三方、主錢包金額

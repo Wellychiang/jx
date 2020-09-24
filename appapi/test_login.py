@@ -17,12 +17,13 @@ def login_success(base, username='wade01'):
     check.equal(json['message'], '登录成功！')
     check.equal(json['success'], True)
     check.equal(json['data']['userName'], username)
-    check.equal(json['data']['userID'], user.id())
-
-# def test_login_userid_failed(base, ):
-#     json = base.login('wade13')
+    check.equal(json['data']['userID'], int(user.id()))
 
 
 def test_login_success(base):
-    usernames = ['wade01', 'wade12', 'wade13']
-    [login_success(base, username) for username in usernames]
+    username = ['wade12', 'wade13', 'wade01']
+    [login_success(base, user) for user in username]
+
+
+# def test_login_userid_failed(base, ):
+#     json = base.login('wade13')

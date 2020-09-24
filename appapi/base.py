@@ -4,9 +4,10 @@ import json
 from pprint import pprint
 from .config.site_url import Site
 from .config.user_info import UserInfo
+import logging
 
-
-import time
+logging.basicConfig(level=logging.DEBUG, filename='basic_tools.log',
+                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
 
 class Base:
@@ -38,10 +39,10 @@ class Base:
                    'nameType': 'account'}
 
         r = self.s.post(url, headers=headers, data=payload, verify=False)
-        print(f'Login: {r.json()}')
+        logging.debug(f'Login: {r.json()}')
         return r.json()
 
-    # 這個暫時用不到了
+    # 抓取上下限額(這個暫時用不到了, 目前被拔掉)
     def get_money_range(self, bank_name, body=None, save=False):
         if self.env == 'sit' or self.env == 'uat':
             site = Site(self.env)
@@ -77,26 +78,44 @@ class Base:
 
         r = self.s.get(url, headers=headers, data=data)
         pprint(f"Get money range: {r.json()['data']}")
-
+        # 決定是否儲存, 預設是False
         if save:
             with open(self.env + bank_name + '%s' % body + '.json', 'a', encoding='utf-8') as file:
                 print(r.json(), file=file)
 
-    def recharge(self, username: str, bank_type: str, amount: float, login_key: int):
+    def recharge(self, username: str, bank_type: str, amount: str, login_key: int):
+
         if self.env == 'sit' or self.env == 'uat':
             site = Site(self.env)
-            url = site.recharge()
-
             user = UserInfo(username)
         else:
             raise EnvironmentError("You can't input without sit or uat. Your input: " + self.env)
 
-        payload = {'serviceTypeName': bank_type,
-                   'amount': amount}
-        # text / plain
-        # application/x-www-form-urlencoded
+        often_recharge = ['AlipayPdd', 'WeiXinPdd', 'AlipayH5', 'WapBank', 'WeiXinScan']
+
+        if bank_type in often_recharge:
+            url = site.recharge()
+            content_type = 'application/x-www-form-urlencoded'
+            payload = {'serviceTypeName': bank_type,
+                       'amount': amount}
+        # 如果輸入的參數都不在常見的充值項目裡, 表示我使用轉卡類, 並對轉卡類不同的request header做區分
+        else:
+            url = site.recharge_by_bank(bank_type)
+            content_type = 'application/json; charset=utf-8'
+            if bank_type == 'bank':
+                payload = {"MoneyInType": 0, "paytype": 2, "amount": amount}
+                payload = json.dumps(payload)
+            elif bank_type == 'alipay_bank':
+                payload = {"ReferUserName": "", "Amount": amount}
+                payload = json.dumps(payload)
+            elif bank_type == 'wechat_bank':
+                payload = {"userName": "", "amount": amount}
+                payload = json.dumps(payload)
+            else:
+                raise ValueError('Should not input without bank type')
+
         headers = {
-            'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Type': content_type,
             'X-Hec-Authentication': login_key,
             'UserID': user.id(),
             'UserName': user.username(),
@@ -106,17 +125,35 @@ class Base:
         }
 
         r = self.s.post(url, headers=headers, data=payload)
-        try:
-            r.json()['Url']
-        except:
-            raise ValueError(f'Can not found the Url in response: {r.json()}')
-            # print(f'Recharge: {r.json()}')
 
-        # 拿到充值之後要開啟的頁面並get, 才會把單子打到Apollo
+        # 如果輸入的參數都不在常見的充值項目裡, 表示我使用轉卡類且也不用再get json()['Url']
+        if bank_type not in often_recharge:
+            try:
+                logging.debug(r.json())
+            except Exception as e:
+                raise ValueError(e)
+            return r.json()
+        elif r.json()['IsSuccess'] is False:
+            logging.debug(r.json())
+            return r.json()
+        # 這裡是常用的充值類別, 且需要get post出去的response url
+        else:
+            try:
+                print(r.json()['Url'])
+            except:
+                raise ValueError(f'Can not found the Url in response: {r.json()}')
+                # print(f'Recharge: {r.json()}')
 
-        get = self.s.get(r.json()['Url'])
-        print(f'Recharge get: {get}')
+            # 拿到充值之後要開啟的頁面並get, 才會把單子打到Apollo
+            try:
+                get = self.s.get(r.json()['Url'])
+                logging.debug(f'Recharge get: {get}')
+            except:
+                raise ValueError(f'Failed to get url: {r.json()}')
 
+        return r.json()
+
+    # io = input or output(這些參數是預設值, 可以在不用輸入參數時還能用)
     def transfer(self, io='in', game='LC', amount=10, key='123'):
         if self.env == 'sit' or self.env == 'uat':
             site = Site(self.env)
@@ -144,6 +181,7 @@ class Base:
         except Exception as e:
             raise ValueError(f'Transfer {io} Error: {e}\nGame: {game}')
 
+    # Get 我的餘額
     def get_balance(self, username, time, key) -> 'third game and my balance':
         if self.env == 'sit' or self.env == 'uat':
             site = Site(self.env)

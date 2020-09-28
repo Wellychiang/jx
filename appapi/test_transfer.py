@@ -2,6 +2,7 @@
 from .base import Base
 import time
 import pytest_check as check
+import logging
 
 
 def est_clean():
@@ -20,6 +21,7 @@ def est_clean():
     # third_game, balance = base.get_balance(time.time() * 1000)
 
 
+# wade13不要換成別的username
 def test_transfer_in_success_equal_one(username='wade13'):
 
     base = Base('sit')
@@ -52,6 +54,7 @@ def test_transfer_in_success_equal_one(username='wade13'):
      if game + 'AvaliableScores' in third_game_balance]
 
 
+# wade13不要換成別的username
 def test_transfer_out_success_equal_zero(username='wade13'):
 
     base = Base('sit')

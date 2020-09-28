@@ -1,0 +1,99 @@
+{
+  "uid" : "6b4793eb1e6954ca",
+  "name" : "test_weixinscan",
+  "fullName" : "test_recharge#test_weixinscan",
+  "historyId" : "b10d4e20d8213317fde36978bea29c25",
+  "time" : {
+    "start" : 1601288097239,
+    "stop" : 1601288102490,
+    "duration" : 5251
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ {
+    "name" : "setup_driver",
+    "time" : {
+      "start" : 1601288093250,
+      "stop" : 1601288097239,
+      "duration" : 3989
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false
+  } ],
+  "testStage" : {
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ {
+      "uid" : "2e84bc54504eb491",
+      "name" : "log",
+      "source" : "2e84bc54504eb491.txt",
+      "type" : "text/plain",
+      "size" : 14554
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : true,
+    "attachmentsCount" : 1,
+    "shouldDisplayMessage" : false
+  },
+  "afterStages" : [ {
+    "name" : "setup_driver::0",
+    "time" : {
+      "start" : 1601288102491,
+      "stop" : 1601288102594,
+      "duration" : 103
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false
+  } ],
+  "labels" : [ {
+    "name" : "feature",
+    "value" : "Positive"
+  }, {
+    "name" : "suite",
+    "value" : "test_recharge"
+  }, {
+    "name" : "host",
+    "value" : "CC-1902009"
+  }, {
+    "name" : "thread",
+    "value" : "28588-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "test_recharge"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "6b4793eb1e6954ca.json",
+  "parameterValues" : [ ]
+}

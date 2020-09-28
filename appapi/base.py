@@ -2,8 +2,8 @@
 import requests
 import json
 from pprint import pprint
-from .config.site_url import Site
-from .config.user_info import UserInfo
+from config.site_url import Site
+from config.user_info import UserInfo
 import logging
 
 logging.basicConfig(level=logging.DEBUG, filename='basic_tools.log',
@@ -91,8 +91,10 @@ class Base:
         else:
             raise EnvironmentError("You can't input without sit or uat. Your input: " + self.env)
 
+        # 一般轉卡類
         often_recharge = ['AlipayPdd', 'WeiXinPdd', 'AlipayH5', 'WapBank', 'WeiXinScan']
 
+        # 被調用後傳入的銀行類型參數若在常用參數內
         if bank_type in often_recharge:
             url = site.recharge()
             content_type = 'application/x-www-form-urlencoded'
@@ -139,7 +141,7 @@ class Base:
         # 這裡是常用的充值類別, 且需要get post出去的response url
         else:
             try:
-                print(r.json()['Url'])
+                logging.debug(r.json()['Url'])
             except:
                 raise ValueError(f'Can not found the Url in response: {r.json()}')
                 # print(f'Recharge: {r.json()}')
@@ -222,5 +224,7 @@ class Base:
 
 if __name__ == '__main__':
     case = Base('sit')
+    response = case.login('jackson')
+    case.recharge('jackson', 'bank', '10', response['data']['key'])
     # json = case.login('wade13')
     # case.transfer(io='out', key=json['data']['key'])

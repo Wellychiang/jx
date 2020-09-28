@@ -1,16 +1,15 @@
-from .base import Base
+from base import Base
 from selenium import webdriver
 import time
 import pytest
 import pytest_check as check
+import os
+import logging
+import allure
+
 init = Base('sit')
 
-
- # AlipayH5
- # WapBank
 url = 'http://console.sit.apollo.ark88.local/Account/Login?ReturnUrl=%2f'
-
-
 user_input = '//*[@name="Username"]'
 pwd_input = "//*[@name='Password']"
 submit = "//*[@type='submit']"
@@ -37,8 +36,8 @@ def setup_driver(apollo_account='jx', apollo_pwd='!QAZ2wsx'):
     driver.close()
 
 
-# AlipayPdd(10),WeiXinPdd(10), AlipayH5(100), WapBank(500), WeiXinScan(100), Usdt(10)
-def for_failed(username='jackson', bank_type='AlipayH5', amount='100'):
+# AlipayPdd(10), WeiXinPdd(10), AlipayH5(10), WapBank(10), WeiXinScan(19), (USDT先別測, 需要Apollo的TradeNo)Usdt(10)
+def for_failed(username='jackson', bank_type='WeiXinScan', amount='19'):
 
     response = init.login(username)
     failed_message = init.recharge(username, bank_type, amount, response['data']['key'])
@@ -52,8 +51,8 @@ def for_failed(username='jackson', bank_type='AlipayH5', amount='100'):
 # 需注意Apollo一個帳號送出一定的充值單量就會卡住
 # ()裡的值為最小限額
 # Pdd的無法選擇錢(一鍵充值)
-# AlipayPdd(10),WeiXinPdd(10), AlipayH5(100), WapBank(500), WeiXinScan(100), Usdt(10)
-def common(setup_driver, username='jackson', bank_type='AlipayH5', amount='10'):
+# AlipayPdd(10), WeiXinPdd(10), AlipayH5(10), WapBank(10), WeiXinScan(19), (USDT先別測, 需要Apollo的TradeNo)Usdt(10)
+def common_recharge(setup_driver, username='jackson', bank_type='AlipayH5', amount='10'):
     response = init.login(username)
     # 充值
     recharge_response = init.recharge(username, bank_type, amount, response['data']['key'])
@@ -71,15 +70,15 @@ def common(setup_driver, username='jackson', bank_type='AlipayH5', amount='10'):
     setup_driver.find_element_by_xpath(order_reason_after_click_Nike).send_keys('qa')
     setup_driver.find_element_by_xpath(ok_after_write_order_reason).click()
     information = setup_driver.find_element_by_xpath("//*[@class='ui-widget-content slick-row even active' and @style='top:0px']")
-    print(information.text)
+    logging.debug(information.text)
     check.is_in(username, information.text)
     check.is_in(str(amount), information.text)
 
 
 # 需注意Apollo一個帳號送出一定的充值單量就會卡住
 # ()裡的值為最小限額
-# 轉卡類case: bank(70), alipay_bank(70), wechat_bank(70)
-def bank(setup_driver, username='jackson', bank_type='wechat_bank', amount='80'):
+# 轉卡類case: bank(11), alipay_bank(70), wechat_bank(70)
+def card_recharge(setup_driver, username='jackson', bank_type='wechat_bank', amount='80'):
     response = init.login(username)
     recharge_response = init.recharge(username, bank_type, amount, response['data']['key'])
 
@@ -108,17 +107,109 @@ def bank(setup_driver, username='jackson', bank_type='wechat_bank', amount='80')
     setup_driver.find_element_by_xpath(order_reason_after_click_Nike).send_keys('qa')
     setup_driver.find_element_by_xpath(ok_after_write_order_reason).click()
     information = setup_driver.find_element_by_xpath("//*[@class='ui-widget-content slick-row even active' and @style='top:0px']")
-    print(information.text)
+    logging.debug(information.text)
     check.is_in(username, information.text)
     check.is_in(str(amount), information.text)
 
 
-def test_reacharge_positive(setup_driver):
-    bank(setup_driver, amount='70')
+# ()裡的值為最小限額
+# 轉卡類case: bank(11), alipay_bank(70), wechat_bank(70)
+def card_for_failed(username='jackson', bank_type='alipay_bank', amount='69'):
+    response = init.login(username)
+    recharge_response = init.recharge(username, bank_type, amount, response['data']['key'])
+
+    # 因三種轉卡類的response不同, 所以需要個別拉出來判斷
+    if bank_type == 'bank':
+        check.equal(False, recharge_response['success'])
+        check.equal('目前没有渠道支援, 请选择其它充值方式(3)', recharge_response['message'])
+    elif bank_type == 'alipay_bank' or bank_type == 'wechat_bank':
+        check.equal(False, recharge_response['success'])
+        check.is_in(f'交易金额: ¥70.00', recharge_response['message'])
 
 
-def test_recharge_minus():
+@allure.feature('Positive')
+def test_alipaypdd(setup_driver, bank_type='AlipayPdd', amount='10'):
+    common_recharge(setup_driver, bank_type=bank_type, amount=amount)
 
-    for_failed(amount='9')
+
+@allure.feature('Positive')
+def test_weixinpdd(setup_driver, bank_type='WeiXinPdd', amount='10'):
+    common_recharge(setup_driver, bank_type=bank_type, amount=amount)
 
 
+@allure.feature('Positive')
+def test_alipayh5(setup_driver, bank_type='AlipayH5', amount='10'):
+    common_recharge(setup_driver, bank_type=bank_type, amount=amount)
+
+
+@allure.feature('Positive')
+def test_wapbank(setup_driver, bank_type='WapBank', amount='10'):
+    common_recharge(setup_driver, bank_type=bank_type, amount=amount)
+
+
+@allure.feature('Positive')
+def test_weixinscan(setup_driver, bank_type='WeiXinScan', amount='19'):
+    common_recharge(setup_driver, bank_type=bank_type, amount=amount)
+
+
+@allure.feature('Positive')
+def test_bank(setup_driver, bank_type='bank', amount='11'):
+    card_recharge(setup_driver, bank_type=bank_type, amount=amount)
+
+
+@allure.feature('Positive')
+def test_alipaybank(setup_driver, bank_type='alipay_bank', amount='70'):
+    card_recharge(setup_driver, bank_type=bank_type, amount=amount)
+
+
+@allure.feature('Positive')
+def test_wechatbank(setup_driver, bank_type='wechat_bank', amount='70'):
+    card_recharge(setup_driver, bank_type=bank_type, amount=amount)
+
+
+@allure.feature('Minus')
+def test_alipaypdd_failed(bank_type='AlipayPdd', amount='9'):
+    for_failed(bank_type=bank_type, amount=amount)
+
+
+@allure.feature('Minus')
+def test_weixinpdd_failed(bank_type='WeiXinPdd', amount='9'):
+    for_failed(bank_type=bank_type, amount=amount)
+
+
+@allure.feature('Minus')
+def test_alipayh5_failed(bank_type='AlipayH5', amount='9'):
+    for_failed(bank_type=bank_type, amount=amount)
+
+
+@allure.feature('Minus')
+def test_wapbank_failed(bank_type='WapBank', amount='9'):
+    for_failed(bank_type=bank_type, amount=amount)
+
+
+@allure.feature('Minus')
+def test_weixinscan_failed(bank_type='WeiXinScan', amount='18'):
+    for_failed(bank_type=bank_type, amount=amount)
+
+
+@allure.feature('Minus')
+def test_bank_failed(bank_type='bank', amount='10'):
+    card_for_failed(bank_type=bank_type, amount=amount)
+
+
+@allure.feature('Minus')
+def test_alipaybank_failed(bank_type='alipay_bank', amount='69'):
+    card_for_failed(bank_type=bank_type, amount=amount)
+
+
+@allure.feature('Minus')
+def test_wechatbank_failed(bank_type='wechat_bank', amount='69'):
+    card_for_failed(bank_type=bank_type, amount=amount)
+
+
+if __name__ == '__main__':
+    # pytest.main(['-vs', 'test_recharge.py'])
+    os.system('del /q report')
+    pytest.main(['-vs', 'test_recharge.py', '--alluredir', 'report'])
+    os.system('allure generate report --clean')
+    os.system('allure open')

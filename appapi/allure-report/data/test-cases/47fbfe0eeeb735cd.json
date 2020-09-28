@@ -1,0 +1,69 @@
+{
+  "uid" : "47fbfe0eeeb735cd",
+  "name" : "test_alipaypdd_failed",
+  "fullName" : "test_recharge#test_alipaypdd_failed",
+  "historyId" : "cffc84e1d634ea6092998270aa4c0411",
+  "time" : {
+    "start" : 1601288136652,
+    "stop" : 1601288136875,
+    "duration" : 223
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ {
+      "uid" : "c8f988faad52d4c1",
+      "name" : "log",
+      "source" : "c8f988faad52d4c1.txt",
+      "type" : "text/plain",
+      "size" : 1190
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : true,
+    "attachmentsCount" : 1,
+    "shouldDisplayMessage" : false
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "feature",
+    "value" : "Minus"
+  }, {
+    "name" : "suite",
+    "value" : "test_recharge"
+  }, {
+    "name" : "host",
+    "value" : "CC-1902009"
+  }, {
+    "name" : "thread",
+    "value" : "28588-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "test_recharge"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "47fbfe0eeeb735cd.json",
+  "parameterValues" : [ ]
+}

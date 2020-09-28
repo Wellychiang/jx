@@ -1,0 +1,217 @@
+{
+  "uid" : "83edc06c07f9ae9e47eb6dd1b683e4e2",
+  "name" : "packages",
+  "children" : [ {
+    "name" : "test_recharge",
+    "children" : [ {
+      "name" : "test_alipaypdd",
+      "uid" : "4df5277bf3723c49",
+      "parentUid" : "000c947b5b093bea7fba16bb7e8e538c",
+      "status" : "passed",
+      "time" : {
+        "start" : 1601288051457,
+        "stop" : 1601288056847,
+        "duration" : 5390
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "test_weixinpdd",
+      "uid" : "310e7e2de7a9a2bb",
+      "parentUid" : "000c947b5b093bea7fba16bb7e8e538c",
+      "status" : "passed",
+      "time" : {
+        "start" : 1601288063549,
+        "stop" : 1601288068631,
+        "duration" : 5082
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "test_alipayh5",
+      "uid" : "54e936ca7f7d98c0",
+      "parentUid" : "000c947b5b093bea7fba16bb7e8e538c",
+      "status" : "passed",
+      "time" : {
+        "start" : 1601288072824,
+        "stop" : 1601288078008,
+        "duration" : 5184
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "test_wapbank",
+      "uid" : "9572e2457eff4c4a",
+      "parentUid" : "000c947b5b093bea7fba16bb7e8e538c",
+      "status" : "passed",
+      "time" : {
+        "start" : 1601288083866,
+        "stop" : 1601288093131,
+        "duration" : 9265
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "test_weixinscan",
+      "uid" : "6b4793eb1e6954ca",
+      "parentUid" : "000c947b5b093bea7fba16bb7e8e538c",
+      "status" : "passed",
+      "time" : {
+        "start" : 1601288097239,
+        "stop" : 1601288102490,
+        "duration" : 5251
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "test_bank",
+      "uid" : "bb94b48e8c9745c1",
+      "parentUid" : "000c947b5b093bea7fba16bb7e8e538c",
+      "status" : "passed",
+      "time" : {
+        "start" : 1601288106616,
+        "stop" : 1601288111789,
+        "duration" : 5173
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "test_alipaybank",
+      "uid" : "2fe4b8b680cef604",
+      "parentUid" : "000c947b5b093bea7fba16bb7e8e538c",
+      "status" : "passed",
+      "time" : {
+        "start" : 1601288116204,
+        "stop" : 1601288121244,
+        "duration" : 5040
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "test_wechatbank",
+      "uid" : "57435c6f31c05ad5",
+      "parentUid" : "000c947b5b093bea7fba16bb7e8e538c",
+      "status" : "passed",
+      "time" : {
+        "start" : 1601288131508,
+        "stop" : 1601288136548,
+        "duration" : 5040
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "test_alipaypdd_failed",
+      "uid" : "47fbfe0eeeb735cd",
+      "parentUid" : "000c947b5b093bea7fba16bb7e8e538c",
+      "status" : "passed",
+      "time" : {
+        "start" : 1601288136652,
+        "stop" : 1601288136875,
+        "duration" : 223
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "test_weixinpdd_failed",
+      "uid" : "e41f77c72a500ba2",
+      "parentUid" : "000c947b5b093bea7fba16bb7e8e538c",
+      "status" : "passed",
+      "time" : {
+        "start" : 1601288136879,
+        "stop" : 1601288137117,
+        "duration" : 238
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "test_alipayh5_failed",
+      "uid" : "4f1e774eb1dcf29e",
+      "parentUid" : "000c947b5b093bea7fba16bb7e8e538c",
+      "status" : "passed",
+      "time" : {
+        "start" : 1601288137119,
+        "stop" : 1601288137429,
+        "duration" : 310
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "test_wapbank_failed",
+      "uid" : "d48e3e8634b43c6c",
+      "parentUid" : "000c947b5b093bea7fba16bb7e8e538c",
+      "status" : "passed",
+      "time" : {
+        "start" : 1601288137435,
+        "stop" : 1601288137660,
+        "duration" : 225
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "test_weixinscan_failed",
+      "uid" : "9b3b0348323d1d32",
+      "parentUid" : "000c947b5b093bea7fba16bb7e8e538c",
+      "status" : "passed",
+      "time" : {
+        "start" : 1601288137663,
+        "stop" : 1601288137896,
+        "duration" : 233
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "test_bank_failed",
+      "uid" : "b8f338b4f7fb33a9",
+      "parentUid" : "000c947b5b093bea7fba16bb7e8e538c",
+      "status" : "passed",
+      "time" : {
+        "start" : 1601288137902,
+        "stop" : 1601288138109,
+        "duration" : 207
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "test_alipaybank_failed",
+      "uid" : "a19411ac8f56370c",
+      "parentUid" : "000c947b5b093bea7fba16bb7e8e538c",
+      "status" : "passed",
+      "time" : {
+        "start" : 1601288138112,
+        "stop" : 1601288138532,
+        "duration" : 420
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "test_wechatbank_failed",
+      "uid" : "5e1d1b9448eb81e8",
+      "parentUid" : "000c947b5b093bea7fba16bb7e8e538c",
+      "status" : "passed",
+      "time" : {
+        "start" : 1601288138536,
+        "stop" : 1601288138860,
+        "duration" : 324
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    } ],
+    "uid" : "000c947b5b093bea7fba16bb7e8e538c"
+  } ]
+}

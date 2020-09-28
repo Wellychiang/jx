@@ -36,10 +36,10 @@ class Site:
                             'alibank': uat + recharge + recharge_alipay,
                             'recharge_bank': uat + recharge + recharge_bank
                                  }}
-
+    # 一般充值類
     recharge_post = {'sit': sit + basic_apollo + basic_post_after_apollo,
                      'uat': uat + basic_apollo + basic_post_after_apollo}
-
+    # 轉卡類
     recharge_post_bank = {'sit': {'bank': sit + recharge + recharge_bank,
                                   'alipay_bank': sit + recharge + recharge_alipay,
                                   'wechat_bank': sit + recharge + recharge_wechat},

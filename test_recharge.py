@@ -210,8 +210,6 @@ def test_wechatbank_failed(bank_type='wechat_bank', amount='69'):
 
 
 if __name__ == '__main__':
-    # del /q 能不提示直接刪除檔案夾(report)裡的東西
-    os.system('del /q report')
+
     pytest.main(['-vs', '--alluredir', 'report'])
-    os.system('allure generate report --clean')
-    os.system('allure open')
+
